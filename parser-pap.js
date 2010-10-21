@@ -1,6 +1,13 @@
 exports.parse = function(body, callback) {
     var jsdom = require('jsdom');
 
+    var parseDate = function(date) {
+        var month_convertor = require('./month-convertor');
+        var pattern = /([\d]{2}) ([\w]+) ([\d]{4})/;
+        var match = date.match(pattern);
+        return new Date(match[3], month_convertor.convert(match[2]), match[1]);
+    };
+
     var window = jsdom.jsdom(body).createWindow();
     jsdom.jQueryify(window, 'http://code.jquery.com/jquery-1.4.2.js',     
                     function() {     
@@ -15,7 +22,7 @@ exports.parse = function(body, callback) {
                            .text(),
                 prix: that.find('.prix').text(),
                 surface: that.find('.surface').text(),
-                'date': that.find('.date-publication').text(),
+                'date': parseDate(that.find('.date-publication').text()),
                 description: that.find('.annonce-resume-text').html(),
                 url: that.find('h2 > a').attr('href'),
             };
