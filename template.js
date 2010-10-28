@@ -5,13 +5,19 @@
         <description>Blah</description>
         <link>http://www.pap.fr</link>
 
-<% for (var i=0 ; i<items.length ; i++) { var item = items[i]; %>
-<item>
-  <title><%=: item.titre %></title>
-  <link><%=: item.url %></link>
-  <pubDate><%=: item['date'] %></pubDate>
-  <description><%=: item.description %></description>
-</item>
+<% for (var i=0 ; i<items.length ; i++) { %>
+  <% var item = items[i];  %>
+  <item>
+    <title><%= item.titre %></title>
+    <link><%= item.url %></link>
+    <pubDate><%= item.created_on %></pubDate>
+    <description>
+      prix: <%= item.prix %>
+      surface: <%= item.surface %>
+      description:
+      <%= item.description %>
+    </description>
+  </item>
 <% } %>
 
 
