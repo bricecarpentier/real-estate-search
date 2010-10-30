@@ -12,5 +12,6 @@ exports.build = function(url) {
             break;
     }
 
-    return require('./parser-' + parserName);
+    var parser = require('./parser-' + parserName);
+    return new parser.Parser();
 };

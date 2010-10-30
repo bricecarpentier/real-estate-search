@@ -1,4 +1,15 @@
-exports.parse = function(body, callback) {
+var sys         = require('util'),
+    events      = require('events'),
+    parser_base = require('./parser');
+
+var Parser = function() {
+    events.EventEmitter.call(this);
+}
+
+sys.inherits(Parser, events.EventEmitter);
+
+Parser.prototype.parse = function(body, callback) {
+    var self = this;
     var BASE_URL = 'http://www.pap.fr';
     var jsdom = require('jsdom');
     var url = require('url');
@@ -29,7 +40,7 @@ exports.parse = function(body, callback) {
                     function() {     
         var links = window.jQuery('div.annonce-resume');
         
-        callback(window.jQuery.map(links, function(item) {
+        self.emit(parser_base.END, window.jQuery.map(links, function(item) {
             var that = window.jQuery(item);
             var o = {
                 titre: that.find('h2 > a')
@@ -46,3 +57,4 @@ exports.parse = function(body, callback) {
         }));
     });
 }
+exports.Parser = Parser;
