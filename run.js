@@ -1,4 +1,4 @@
-var sys             = require('sys'),
+var sys             = require('util'),
     request         = require('request'),
     ejs             = require('ejs'),
     fs              = require('fs'),
