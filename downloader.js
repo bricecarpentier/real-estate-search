@@ -68,7 +68,8 @@ Downloader.prototype.download = function() {
 }
 
 
-exports.STEP = STEP;
-exports.ALL  = ALL;
+exports.STEP    = STEP;
+exports.ERROR   = ERROR;
+exports.ALL     = ALL;
 
 exports.Downloader = Downloader;
