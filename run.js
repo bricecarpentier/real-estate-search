@@ -8,7 +8,11 @@ var sys             = require('util'),
 
 
 var slash = function(req, res) {
-    var url = 'http://www.pap.fr/annonce/vente-appartement-loft-atelier-maison-lyon-1er-g35369g35370g35371g35372g35374g35375g35376g35377';
+    url_liste = [
+        //'http://www.pap.fr/annonce/vente-appartement-loft-atelier-maison-lyon-1er-g35369g35370g35371g35372g35374g35375g35376g35377',
+        'http://www.seloger.com/recherche.htm?pxbtw=NaN/NaN&surfacebtw=40/NaN&idtt=2&nb_pieces=all&idtypebien=1,2&=&nb_chambres=all&tri=d_dt_crea&fakeci=690123&ci=690381,690382,690383,690384,690385,690386,690387,690388,690389&idqfix=1&BCLANNpg=1#pxbtw:NaN;NaN/surfacebtw:40;NaN/idtt:2/nb_pieces:all/idtypebien:1,2,9/:/nb_chambres:all/tri:d_dt_crea/fakeci:690123/ci:690381,690382,690383,690384,690385,690386,690387,690388,690389/idqfix:1/BCLANNpg:1',
+        //'http://www.seloger.com/recherche.htm?pxbtw=NaN/NaN&surfacebtw=40/NaN&idtt=2&nb_pieces=all&idtypebien=1,2,9&=&nb_chambres=all&tri=a_px&fakeci=690123&ci=690381,690382,690383,690384,690385,690386,690387,690388,690389&idqfix=1&BCLANNpg=1',
+    ];
     
     var render = function(items) {
         items.sort(function(a,b) {
@@ -41,7 +45,7 @@ var slash = function(req, res) {
 
 
     var d = new downloader.Downloader();
-    d.setURLs([url]);
+    d.setURLs(url_liste);
     d.on(downloader.STEP, function(downloadedData) {
         var p = parser.factory.build(downloadedData.url);
         p.once(parser.END, store)

@@ -10,6 +10,9 @@ exports.build = function(url) {
         case 'www.leboncoin.fr':
             parserName = 'lbc';
             break;
+        case 'www.seloger.com':
+            parserName = 'seloger';
+            break;
     }
 
     var parser = require('./' + parserName);
