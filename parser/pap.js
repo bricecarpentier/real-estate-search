@@ -1,18 +1,18 @@
 var sys         = require('util'),
     events      = require('events'),
+    jsdom       = require('jsdom'),
+    url         = require('url'),
     parser_base = require('./index');
-
+    
 var Parser = function() {
     events.EventEmitter.call(this);
 }
 
 sys.inherits(Parser, events.EventEmitter);
 
-Parser.prototype.parse = function(body, callback) {
+Parser.prototype.parse = function(body) {
     var self = this;
     var BASE_URL = 'http://www.pap.fr';
-    var jsdom = require('jsdom');
-    var url = require('url');
 
     var parseDate = function(date, pattern) {
         var month_convertor = require('../month-convertor');
@@ -35,7 +35,7 @@ Parser.prototype.parse = function(body, callback) {
                     function() {     
         var links = window.jQuery('div.annonce-resume');
         
-        self.emit(parser_base.END, window.jQuery.map(links, function(item) {
+        var objects = window.jQuery.map(links, function(item) {
             var that = window.jQuery(item);
             var o = {
                 titre: that.find('h2 > a')
@@ -52,7 +52,9 @@ Parser.prototype.parse = function(body, callback) {
                 url: url.resolve(BASE_URL, that.find('h2 > a').attr('href')),
             };
             return o;
-        }));
+        });
+        
+        self.emit(parser_base.END, objects);
     });
 }
 exports.Parser = Parser;
