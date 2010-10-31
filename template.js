@@ -10,11 +10,13 @@
   <item>
     <title><%= item.titre %></title>
     <link><%= item.url %></link>
-    <pubDate><%= item.created_on %></pubDate>
+    <% if (item.created_on || item.updated_on) { %>
+    <pubDate><%= item.updated_on ? item.updated_on : item.created_on %></pubDate>
+    <% } %>
     <description>
-      prix: <%= item.prix %>
-      surface: <%= item.surface %>
-      description:
+      <strong><%= item.prix %></strong><br />
+      <strong><%= item.surface %></strong><br />
+      
       <%= item.description %>
     </description>
   </item>

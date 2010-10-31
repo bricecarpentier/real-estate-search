@@ -14,22 +14,17 @@ Parser.prototype.parse = function(body, callback) {
     var jsdom = require('jsdom');
     var url = require('url');
 
-    var parseDate = function(date) {
+    var parseDate = function(date, pattern) {
         var month_convertor = require('../month-convertor');
-        var pattern_new = /Annonce nouvelle du  ([\d]{2}) ([\w]+) ([\d]{4})/;
-        var pattern_maj = /Annonce modifiée le ([\d]{2}) ([\w]+) ([\d]{4})/;
         var match;
         var dateObj = new Date();
         
-        match = date.match(pattern_new);
+        match = date.match(pattern);
+        
+        var date = null;
         
         if (match && match.length == 4) {
-            return new Date(match[3], month_convertor.convert(match[2]), match[1]);
-        } else {
-            match = date.match(pattern_maj);
-            if (match && match.length == 4) {
-                return new Date(match[3], month_convertor.convert(match[2]), match[1]);
-            }
+            date = new Date(match[3], month_convertor.convert(match[2]), match[1]);
         }
         
         return date;
@@ -49,7 +44,10 @@ Parser.prototype.parse = function(body, callback) {
                            .text().trim(),
                 prix: that.find('.prix').text().trim(),
                 surface: that.find('.surface').text(),
-                created_on: parseDate(that.find('.date-publication').text()),
+                created_on: parseDate(that.find('.date-publication').text(),
+                                      /Annonce nouvelle du  ([\d]{2}) ([\w]+) ([\d]{4})/),
+                updated_on: parseDate(that.find('.date-publication').text(),
+                                      /Annonce modifiée le ([\d]{2}) ([\w]+) ([\d]{4})/),
                 description: that.find('.annonce-resume-text').text(),
                 url: url.resolve(BASE_URL, that.find('h2 > a').attr('href')),
             };
