@@ -1,6 +1,6 @@
 var sys         = require('util'),
     events      = require('events'),
-    parser_base = require('./parser');
+    parser_base = require('./index');
 
 var Parser = function() {
     events.EventEmitter.call(this);
@@ -15,7 +15,7 @@ Parser.prototype.parse = function(body, callback) {
     var url = require('url');
 
     var parseDate = function(date) {
-        var month_convertor = require('./month-convertor');
+        var month_convertor = require('../month-convertor');
         var pattern_new = /Annonce nouvelle du  ([\d]{2}) ([\w]+) ([\d]{4})/;
         var pattern_maj = /Annonce modifiée le ([\d]{2}) ([\w]+) ([\d]{4})/;
         var match;

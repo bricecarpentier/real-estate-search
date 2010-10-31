@@ -3,8 +3,7 @@ var sys             = require('util'),
     ejs             = require('ejs'),
     fs              = require('fs'),
     downloader      = require('./downloader'),
-    parser          = require('./parser'),
-    parser_factory  = require('./parser-factory');
+    parser          = require('./parser');
 
 var url = 'http://www.pap.fr/annonce/vente-appartement-loft-atelier-maison-lyon-1er-g35369g35370g35371g35372g35374g35375g35376g35377';
 
@@ -41,7 +40,7 @@ var store = function(items) {
 var d = new downloader.Downloader();
 d.setURLs([url]);
 d.on(downloader.STEP, function(downloadedData) {
-    var p = parser_factory.build(downloadedData.url);
+    var p = parser.factory.build(downloadedData.url);
     p.once(parser.END, store)
     p.parse(downloadedData.data);
 })
