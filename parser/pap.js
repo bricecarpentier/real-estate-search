@@ -15,7 +15,7 @@ Parser.prototype.parse = function(body) {
     var BASE_URL = 'http://www.pap.fr';
 
     var parseDate = function(date, pattern) {
-        var month_convertor = require('../month-convertor');
+        var month_convertor = require('../utils/month-convertor');
         var match;
         var dateObj = new Date();
         
