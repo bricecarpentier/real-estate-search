@@ -6,6 +6,7 @@ var get_edit_feed = function(req, res) {
     res.render('feed/edit.ejs', {
         locals: {
             form: form,
+            flash: req.flash()
         }
     })
 }
@@ -17,6 +18,7 @@ var post_edit_feed = function(req, res) {
             var feed = new models.Feed();
             feed.name = form.data.name;
             feed.save();
+            req.flash('info', 'Le feed "%s" a bien été créé', feed.name);
             res.redirect('/feed/' + feed._id.toHexString());
         },
         error: function(form) {

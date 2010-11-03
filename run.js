@@ -3,9 +3,15 @@ var sys             = require('util'),
     feed            = require('./feed');
 
 var app = express.createServer();
+app.use(express.cookieDecoder());
+app.use(express.session());
 
 app.get('/', function(req, res) {
-    res.render('index.ejs');
+    res.render('index.ejs', {
+        locals: {
+            flash: req.flash()
+        }
+    });
 });
 
 app.get('/feed.rss', feed.display);

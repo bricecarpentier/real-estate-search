@@ -5,6 +5,20 @@
 	    <title>Real Estate Search</title>
 	</head>
 	<body>
+            <% if (typeof(flash) != 'undefined') { %>
+
+            <div class="flash">
+                <% for (var type in flash) { %>
+                <ul class="<%= type %>">
+                    <% flash[type].forEach(function(message) { %>
+                    <li>
+                        <%= message %>
+                    </li>
+                    <% }) %>
+                </ul>
+                <% } %>
+            </div>
+            <% } %>
 	    <%- body %>
 	</body>
 </html>
