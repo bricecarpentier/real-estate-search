@@ -3,7 +3,7 @@ var models = require('../models');
 
 var get_edit_feed = function(req, res) {
     var form = form_module.new_feed;
-    res.render('new.ejs', {
+    res.render('feed/edit.ejs', {
         locals: {
             form: form,
         }

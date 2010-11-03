@@ -18,7 +18,7 @@ var display = function(req, res) {
             return a.created_on - b.created_on;
         })
 
-        res.render('feed.ejs', {
+        res.render('feed/display.ejs', {
             locals: {
                 items:items
             },
