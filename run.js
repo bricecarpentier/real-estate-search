@@ -1,16 +1,20 @@
 var sys             = require('util'),
     express         = require('express'),
-    feed            = require('./feed');
+    feed            = require('./feed'),
+    models          = require('./models');
 
 var app = express.createServer();
 app.use(express.cookieDecoder());
 app.use(express.session());
 
 app.get('/', function(req, res) {
-    res.render('index.ejs', {
-        locals: {
-            flash: req.flash()
-        }
+    models.Feed.find().all(function(feeds) {
+        res.render('index.ejs', {
+            locals: {
+                flash: req.flash(),
+                feeds: feeds
+            }
+        });
     });
 });
 

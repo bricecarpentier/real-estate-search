@@ -15,7 +15,13 @@ mongoose.model('Feed', {
                 'updated_on'
             ]]}
         ]]}
-    ]
+    ],
+
+    getters: {
+        id: function() {
+            return this._id.toHexString();
+        }
+    }
 })
 
 var db = mongoose.connect('mongodb://localhost/test');

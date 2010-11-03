@@ -1,3 +1,16 @@
 <p>
     <a href="/feed/new" title="nouveau feed">Créer un feed</a>
 </p>
+
+<h2>Feeds existants</h2>
+<% if (feeds.length) { %>
+<ul>
+    <% feeds.forEach(function(feed) { %>
+    <li>
+        <a href="/feed/<%= feed.id %>" title="éditer"><%= feed.name %></a>
+    </li>
+    <% }) %>
+</ul>
+<% } else { %>
+    <p>Aucun feed a l'heure actuelle.</p>
+<% } %>
