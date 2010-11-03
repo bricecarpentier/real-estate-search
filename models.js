@@ -20,4 +20,4 @@ mongoose.model('Feed', {
 
 var db = mongoose.connect('mongodb://localhost/test');
 
-exports.Recherche = db.model('Recherche');
+exports.Feed = db.model('Feed');

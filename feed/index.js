@@ -1,2 +1,3 @@
 exports.display = require('./display').display;
-exports.new_feed = require('./new-feed').new_feed;
+exports.get_new_feed = require('./new-feed').get_new_feed;
+exports.post_new_feed = require('./new-feed').post_new_feed;
