@@ -1,18 +1,31 @@
-var form_module = require('../forms/new-feed');
+var form_module = require('../forms/edit');
 var models = require('../models');
 
 var get_edit_feed = function(req, res) {
-    var form = form_module.new_feed;
-    res.render('feed/edit.ejs', {
-        locals: {
-            form: form,
-            flash: req.flash()
+    var render = function(obj) {
+        var form = form_module.edit;
+        if (obj) {
+            form.bind(obj);
         }
-    })
+        res.render('feed/edit.ejs', {
+            locals: {
+                form: form,
+                flash: req.flash()
+            }
+        })
+    };
+
+    if (req.params.id) {
+        models.Feed.findById(req.params.id, function(feed) {
+            render(feed);
+        });
+    } else {
+        render(null);
+    }
 }
 
 var post_edit_feed = function(req, res) {
-    var form = form_module.new_feed;
+    var form = form_module.edit;
     form.handle(req, {
         success: function(form) {
             var feed = new models.Feed();
