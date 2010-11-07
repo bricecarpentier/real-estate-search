@@ -1,0 +1,10 @@
+<form action="/feeds/<%= object.id %>" method="post">
+    <input type="hidden" name="_method" value="delete" />
+    <p>
+        Voulez-vous vraiment supprimer le feed "<%= object.name %>" ?
+    </p>
+    <p>
+        <input type="submit" value="Oui, je le veux" />
+        <a href="/feeds/<%= object.id %>/edit" title="cancel">Finalement, non</a>
+    </p>
+</form>

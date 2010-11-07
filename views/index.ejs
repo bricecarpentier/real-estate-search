@@ -1,13 +1,15 @@
 <p>
-    <a href="/feed/new" title="nouveau feed">Créer un feed</a>
+    <a href="/feeds/new" title="nouveau feed">Créer un feed</a>
 </p>
 
 <h2>Feeds existants</h2>
-<% if (feeds.length) { %>
+<% if (object_list.length) { %>
 <ul>
-    <% feeds.forEach(function(feed) { %>
+    <% object_list.forEach(function(feed) { %>
     <li>
-        <a href="/feed/<%= feed.id %>" title="éditer"><%= feed.name %></a>
+        <%= feed.name %>
+        <a href="/feeds/<%= feed.id %>/edit" title="éditer">Éditer</a>
+        <a href="/feeds/<%= feed.id %>/delete" title="supprimer">Effacer</a>
     </li>
     <% }) %>
 </ul>

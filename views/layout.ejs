@@ -5,7 +5,8 @@
 	    <title>Real Estate Search</title>
 	</head>
 	<body>
-            <% if (typeof(flash) != 'undefined') { %>
+            <% var flash = this.flash() %>
+            <% if (flash.length) { %>
 
             <div class="flash">
                 <% for (var type in flash) { %>

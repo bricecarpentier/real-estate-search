@@ -1,6 +1,6 @@
-exports.display = require('./display').display;
-
-var edit = require('./edit')
-for (var prop in edit) {
-    exports[prop] = edit[prop];
-}
+['./display', './edit'].forEach(function(file) {
+    var module = require(file)
+    for (var prop in module) {
+        exports[prop] = module[prop]
+    }
+})
