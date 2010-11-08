@@ -21,6 +21,12 @@ mongoose.model('Feed', {
         id: function() {
             return this._id.toHexString();
         }
+    },
+    
+    static: {
+        findAll: function(callback) {
+            return this.find().all(callback)
+        }
     }
 })
 

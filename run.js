@@ -11,8 +11,7 @@ app.use(express.cookieDecoder());
 app.use(express.session());
 app.use(express.methodOverride());
 
-app.get('/feeds/', generics.object_list(models.Feed, [], 'index.ejs'));
-
+app.get('/feeds/', generics.object_list(models.Feed.findAll.bind(models.Feed), 'index.ejs'));
 
 app.post('/feeds/', feed.post_edit_feed);
 app.get('/feeds/new', generics.direct_to_template('feed/edit.ejs', {

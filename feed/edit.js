@@ -3,7 +3,7 @@ var models = require('../models');
 
 var post_edit_feed = function(req, res) {
     var save = function(object, data) {
-        var _object = (object !== undefined) ? object : new models.Feed()
+        var _object = object ? object : new models.Feed()
         _object.name = data.name
         _object.save()
         req.flash('info', 'Le feed "%s" a bien été créé', _object.name);
